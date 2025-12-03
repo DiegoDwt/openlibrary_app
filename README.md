@@ -6,14 +6,14 @@ Inclui integração com um backend simples para persistir os favoritos e telas o
 
 📘 Descrição Geral
 
-Busca livros usando a API pública OpenLibrary
+Busca livros usando a API pública OpenLibrary;
 
-Exibe detalhes completos de cada livro
+Exibe detalhes completos de cada livro;
 
-Permite favoritar e desfavoritar livros
+Permite favoritar e desfavoritar livros;
 
-Armazena favoritos através de um backend simples
+Armazena favoritos através de um backend simples;
 
-Usa Provider para gerenciamento de estado
+Usa Provider para gerenciamento de estado;
 
-Conta com testes unitários, widget tests e testes de integração end-to-end
+Conta com testes unitários, widget tests e testes de integração end-to-end.
