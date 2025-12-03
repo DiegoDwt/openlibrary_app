@@ -1,0 +1,1 @@
+{"title":"Dune","authors":["Frank Herbert"],"cover_id":11481354,"cover_url":"https://covers.openlibrary.org/b/id/11481354-M.jpg","key":"/works/OL893415W","first_publish_year":1965,"isbns":null,"description":null,"source_url":"https://openlibrary.org/works/OL893415W"}

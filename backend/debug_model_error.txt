@@ -1,0 +1,6 @@
+[2025-11-23T15:54:36+01:00] insertFromArray error: SQLSTATE[HY000]: General error: 1 table books has no column named source_url in C:\xampp\htdocs\meuapp\src\BookModel.php:101
+Trace:
+#0 C:\xampp\htdocs\meuapp\src\BookModel.php(101): PDO->prepare('\r\n            I...')
+#1 C:\xampp\htdocs\meuapp\save.php(39): BookModel->insertFromArray(Array)
+#2 {main}
+
