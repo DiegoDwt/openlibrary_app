@@ -1,19 +1,16 @@
-📚 OpenLibrary App
+# openlibrary_app
 
-Aplicativo Flutter para pesquisar livros na OpenLibrary, visualizar detalhes e gerenciar favoritos usando Provider.
-Inclui integração com um backend simples para persistir os favoritos e telas organizadas por módulos.
+A new Flutter project.
 
+## Getting Started
 
-📘 Descrição Geral
+This project is a starting point for a Flutter application.
 
-Busca livros usando a API pública OpenLibrary;
+A few resources to get you started if this is your first Flutter project:
 
-Exibe detalhes completos de cada livro;
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-Permite favoritar e desfavoritar livros;
-
-Armazena favoritos através de um backend simples;
-
-Usa Provider para gerenciamento de estado;
-
-Conta com testes unitários, widget tests e testes de integração end-to-end.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

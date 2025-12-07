@@ -38,7 +38,12 @@ class _SearchScreenState extends State<SearchScreen> {
   Book? _mapFromRawMap(Map rawMap) {
     final Map<String, dynamic> m = Map<String, dynamic>.from(rawMap);
 
-      try {
+    // Normalizações úteis:
+    // - edition_key ou edition_keys -> edition_key (Book.fromSearchDoc expects 'edition_key')
+    // - author_name -> author_name
+    // - cover_i -> cover_i
+    // Não precisamos alterar as chaves do Map se Book.fromSearchDoc já entende as chaves do OpenLibrary.
+    try {
       // Caso pareça um doc do /search.json da OpenLibrary
       if (m.containsKey('title') && (m.containsKey('author_name') || m.containsKey('edition_key') || m.containsKey('cover_i') || m.containsKey('has_fulltext'))) {
         try {
@@ -62,6 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
         final hasFulltext = m['has_fulltext'] == true || m['hasFullText'] == true || (m['fulltext'] == true);
 
         return Book(
+          // Book constructor requires title and authors; other fields are optional
           title: title.isEmpty ? 'Sem título' : title,
           authors: authors,
           coverId: coverId,
@@ -161,9 +167,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Row(
               children: [
                 Expanded(
-                  // Adicionada Key ao TextField para facilitar testes de integração
                   child: TextField(
-                    key: const Key('search_field'),
                     controller: _controller,
                     textInputAction: TextInputAction.search,
                     decoration: const InputDecoration(
@@ -175,8 +179,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 const SizedBox(width: 10),
                 ElevatedButton(
-                  // Adicionada Key ao botão Buscar para testes
-                  key: const Key('search_button'),
                   onPressed: searchBooks,
                   child: const Text("Buscar"),
                 )
@@ -198,7 +200,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 return ListTile(
                                   contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                                   title: BookCard(
-                                    key: Key('book_$index'),
                                     book: book,
                                     onTap: () {
                                       Navigator.push(

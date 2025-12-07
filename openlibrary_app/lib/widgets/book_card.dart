@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:openlibrary_app/models/book.dart';
-import 'package:openlibrary_app/providers/favorites_provider.dart';
+import '../models/book.dart';
 
-/// Componente visual que mostra capa, título, autores e ações de um livro.
 class BookCard extends StatelessWidget {
   final Book book;
   final VoidCallback? onTap;
 
-  /// Callback disparada quando o usuário pressiona o botão de favoritar.
-  /// Se não fornecida, o widget tenta usar o FavoritesProvider presente no contexto.
+  /// Essa callback continua existindo, mas NÃO renderiza mais um botão aqui.
   final VoidCallback? onFavoriteToggle;
 
-  /// Indica visualmente se o item já é favorito (altera o ícone).
   final bool isFavorite;
 
   const BookCard({
@@ -23,8 +18,6 @@ class BookCard extends StatelessWidget {
     this.isFavorite = false,
   }) : super(key: key);
 
-  // Resolve a URL da capa: primeiro tenta coverUrl do modelo, depois tenta gerar
-  // a URL a partir do primeiro ISBN (se existir).
   String? _resolveCoverUrl() {
     final cover = (book.coverUrl).trim();
     if (cover.isNotEmpty) return cover;
@@ -38,7 +31,6 @@ class BookCard extends StatelessWidget {
     return null;
   }
 
-  // Junta autores em uma única string separada por vírgula.
   String _authorsToString() {
     if (book.authors.isEmpty) return '';
     return book.authors.join(', ');
@@ -52,14 +44,13 @@ class BookCard extends StatelessWidget {
         (book.openLibraryUrl != null && book.openLibraryUrl!.isNotEmpty);
 
     return GestureDetector(
-      onTap: onTap, // permite ação ao tocar no card (ex.: abrir detalhe)
+      onTap: onTap,
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Área da capa (expandida para ocupar espaço disponível)
             Expanded(
               child: ClipRRect(
                 borderRadius:
@@ -74,13 +65,11 @@ class BookCard extends StatelessWidget {
               ),
             ),
 
-            // Corpo com título, autores e botões (link + favoritar)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Título — truncado em 2 linhas
                     Text(
                       book.title,
                       maxLines: 2,
@@ -88,7 +77,6 @@ class BookCard extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
 
-                    // Autores — somente se houver
                     if (authors.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 4),
@@ -102,34 +90,14 @@ class BookCard extends StatelessWidget {
                       ),
 
                     const SizedBox(height: 6),
+
+                    // Agora só mostra o link!
                     Row(
                       children: [
                         const Spacer(),
-
-                        // Ícone de link (apenas indicador visual)
-                        if (hasLink) Icon(Icons.link, size: 16, color: Colors.grey[600]),
-
-                        // Botão de favoritar:
-                        IconButton(
-                          key: const Key('fav_button'),
-                          icon: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                          ),
-                          tooltip: isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos',
-                          onPressed: () async {
-                            if (onFavoriteToggle != null) {
-                              onFavoriteToggle!();
-                              return;
-                            }
-                            try {
-                              final provider = Provider.of<FavoritesProvider>(context, listen: false);
-                              await provider.addFavorite(book);
-                            } catch (e) {
-                              // Se não houver provider no contexto ou ocorrer erro, não quebra a UI.
-                              // Você pode logar ou mostrar um SnackBar aqui se desejar.
-                            }
-                          },
-                        ),
+                        if (hasLink)
+                          Icon(Icons.link,
+                              size: 16, color: Colors.grey[600]),
                       ],
                     ),
                   ]),
@@ -140,7 +108,6 @@ class BookCard extends StatelessWidget {
     );
   }
 
-  // Placeholder simples usado quando não há capa.
   Widget _placeholderCover() {
     return Container(
       color: Colors.grey[200],
