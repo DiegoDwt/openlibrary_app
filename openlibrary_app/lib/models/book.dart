@@ -5,7 +5,7 @@ class Book {
   final String title;
   final List<String> authors;
   final int? coverId;
-  final String? coverUrlBackend; // <--- NOVO: cover_url direto do backend
+  final String? coverUrlBackend; 
   final String? key;
   final int? firstPublishYear;
   final List<String>? isbns;

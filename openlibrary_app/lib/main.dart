@@ -15,9 +15,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ChangeNotifierProvider fornece uma instância do FavoritesProvider para toda
-    // a árvore de widgets abaixo (via Provider package). Widgets descendentes
-    // podem obter a instância e reagir às notificações (notifyListeners).
     return ChangeNotifierProvider(
       create: (_) {
         // O provider que gerencia a lista de favoritos e passa a dependência do backend.

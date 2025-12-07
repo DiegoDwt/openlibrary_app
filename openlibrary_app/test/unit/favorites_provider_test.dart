@@ -16,15 +16,11 @@ class FakeBackendService implements BackendService {
 
   @override
   Future<int?> saveBook(Book book) async {
-    // Se sua Book não tem copyWith, criamos uma nova instância com o novo id.
-    // Assumimos que Book tem named params id, title e authors — ajuste se necessário.
     final int assignedId = (book.id == 0 || book.id == null) ? _nextId : book.id!;
     final newBook = Book(
       id: assignedId,
       title: book.title,
       authors: book.authors,
-      // se tiver outros campos públicos (ex: coverUrl), adicione aqui:
-      // coverUrl: (book as dynamic).coverUrl ?? null,
     );
 
     // Se o book já tiver id > 0 e existir, removemos o anterior (evita duplicatas)

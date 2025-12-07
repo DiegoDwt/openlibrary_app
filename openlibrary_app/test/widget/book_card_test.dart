@@ -15,9 +15,7 @@ class FakeBackendService implements BackendService {
 
   @override
   Future<int?> saveBook(Book book) async {
-    // Não usamos copyWith (não existe). Apenas guardamos o objeto recebido.
     _store.add(book);
-    // retornamos um id (mesmo que o objeto não tenha sido atualizado com esse id)
     return _nextId++;
   }
 
