@@ -160,7 +160,7 @@ class Book {
   Map<String, dynamic> toJson() => toJsonForSave();
 
   // -----------------------------
-  // 4) Helpers
+  // 4) Funções Auxiliares
   // -----------------------------
 
   String? get isbn =>
